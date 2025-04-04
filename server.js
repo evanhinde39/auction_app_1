@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { Client } = require('pg');  // Import the pg package
-require('dotenv').config(); // Load environment variables from .env file
+const { Pool } = require('pg');  // Use Pool instead of Client for better connection handling
+require('dotenv').config(); // Load environment variables
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -11,22 +11,21 @@ const port = process.env.PORT || 3001;
 app.use(cors()); // Enable CORS
 app.use(express.json()); // Enable JSON parsing
 
-// Database connection
-const client = new Client({
-  connectionString: process.env.DB_CONNECTION_STRING, // Connection string from .env file
+// Database connection pool (keeps connections alive for queries)
+const pool = new Pool({
+  connectionString: process.env.DB_CONNECTION_STRING,
 });
 
-// Test the database connection
-client.connect()
-  .then(() => {
-    console.log("Successfully connected to PostgreSQL database!");
-  })
-  .catch((err) => {
-    console.error("Error connecting to PostgreSQL database:", err.stack);
-  })
-  .finally(() => {
-    client.end(); // Close the database connection after testing
-  });
+// Test database connection route
+app.get('/test-db', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT NOW() AS current_time'); // Simple query
+    res.json({ success: true, time: result.rows[0].current_time });
+  } catch (error) {
+    console.error('Database connection error:', error);
+    res.status(500).json({ success: false, message: 'Database connection failed' });
+  }
+});
 
 // Serve React static files in production
 if (process.env.NODE_ENV === 'production') {
