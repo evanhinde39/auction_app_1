@@ -9,11 +9,10 @@ const Layout = ({ children }) => {
       
       <nav className="bg-danger d-flex">
         <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">Home</a>
-        <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">My Pools</a>
-        <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">Create Pool</a>
+        <a href="/mypools" className="btn btn-danger mx-2 my-1 text-white hover-expand">My Pools</a>
+        <a href="/createpool" className="btn btn-danger mx-2 my-1 text-white hover-expand">Create Pool</a>
         <a href="/about" className="btn btn-danger mx-2 my-1 text-white hover-expand ms-auto">About</a>
       </nav>
-
 
       <main style={{ padding: "1rem" }}>
         {children}  {/* 👈 This is where the page content goes */}
