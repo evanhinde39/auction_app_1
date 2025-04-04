@@ -1,3 +1,4 @@
+import { Button } from "bootstrap";
 import React, { useEffect, useState } from "react";
 
 const Home = () => {
@@ -19,6 +20,9 @@ const Home = () => {
       ) : (
         <p>Loading database test...</p>
       )}
+      <button class="btn btn-danger">
+        test bootstrap button
+      </button>
     </div>
   );
 };
