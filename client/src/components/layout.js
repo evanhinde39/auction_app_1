@@ -3,21 +3,33 @@ import React from "react";
 const Layout = ({ children }) => {
   return (
     <div>
-      <header style={{ padding: "1rem", backgroundColor: "#eee" }}>
-        <h2>Site Header</h2>
+      <header className="bg-dark text-white py-2">
+        <h2 className="ms-3">auctionpools.ca</h2>
       </header>
       
-      <nav style={{ padding: "1rem", backgroundColor: "#ccc" }}>
-        <a href="/">Home</a> | <a href="/about">About</a>
+      <nav className="bg-danger d-flex">
+        <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">Home</a>
+        <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">My Pools</a>
+        <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">Create Pool</a>
+        <a href="/about" className="btn btn-danger mx-2 my-1 text-white hover-expand ms-auto">About</a>
       </nav>
+
 
       <main style={{ padding: "1rem" }}>
         {children}  {/* 👈 This is where the page content goes */}
       </main>
 
-      <footer style={{ padding: "1rem", backgroundColor: "#eee" }}>
-        <p>Site Footer</p>
-      </footer>
+      <footer className="d-flex justify-content-center align-items-center p-3">
+        <a href="/" className="text-black text-decoration-none mx-3 hover:text-danger">Home</a>
+        <a href="/about" className="text-black text-decoration-none mx-3 hover:text-danger">About</a>
+      <a href="/contact" className="text-black text-decoration-none mx-3 hover:text-danger">Contact</a>
+</footer>
+
+
+
+
+
+
     </div>
   );
 };

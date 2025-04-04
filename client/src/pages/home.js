@@ -20,7 +20,7 @@ const Home = () => {
       ) : (
         <p>Loading database test...</p>
       )}
-      <button class="btn btn-danger">
+      <button className="btn btn-danger">
         test bootstrap button
       </button>
     </div>
