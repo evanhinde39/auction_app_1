@@ -4,7 +4,8 @@ import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
-import CreatePool from "./pages/CreatePool";
+import CreatePoolDashboard from "./pages/CreatePool/Dashboard";
+import CreatePool from "./pages/CreatePool/CreatePool";
 import MyPools from "./pages/MyPools";
 import JoinPool from "./pages/JoinPool";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/mypools" element={<MyPools />} />
           <Route path="/joinpool" element={<JoinPool />} />
+          <Route path="/createpooldashboard" element={<CreatePoolDashboard />} />
           <Route path="/createpool" element={<CreatePool />} />
         </Routes>
       </Layout>
