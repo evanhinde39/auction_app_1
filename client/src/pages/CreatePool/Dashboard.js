@@ -6,7 +6,11 @@ const Dashboard = () => {
     <div className="container mt-4">
       <h2>Create Pool</h2>
 
-      <Link to="/createpool" style={{ textDecoration: 'none' }}>
+      <Link 
+        to="/createpool" 
+        state={{ poolStyle: "NFL Regular Season" }}
+        style={{ textDecoration: 'none' }}
+      >
         <div
           className="rounded-3 shadow-sm overflow-hidden"
           style={{
