@@ -13,6 +13,8 @@ const Layout = ({ children }) => {
         <a href="/joinpool" className="btn btn-danger mx-2 my-1 text-white hover-expand">Join Pool</a>
         <a href="/createpooldashboard" className="btn btn-danger mx-2 my-1 text-white hover-expand">Create Pool</a>
         <a href="/about" className="btn btn-danger mx-2 my-1 text-white hover-expand ms-auto">About</a>
+        <a href="/login" className="btn btn-danger mx-2 my-1 text-white hover-expand ms-auto">Login</a>
+        <a href="/register" className="btn btn-danger mx-2 my-1 text-white hover-expand ms-auto">Register</a>
       </nav>
 
       <main style={{ padding: "1rem" }}>

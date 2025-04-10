@@ -1,25 +1,30 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { Pool } = require('pg');  // Use Pool instead of Client for better connection handling
-require('dotenv').config(); // Load environment variables
+const { Pool } = require('pg');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors()); // Enable CORS
-app.use(express.json()); // Enable JSON parsing
+app.use(cors());
+app.use(express.json());
 
-// Database connection pool (keeps connections alive for queries)
+// Database connection pool
 const pool = new Pool({
   connectionString: process.env.DB_CONNECTION_STRING,
 });
 
-// Test database connection route
+// Import auth routes and inject the pool (if needed there)
+const authRoutes = require("./routes/auth");
+
+app.use('/api/auth', authRoutes(pool)); // pass pool if your auth.js is a function
+
+// Test DB route
 app.get('/test-db', async (req, res) => {
   try {
-    const result = await pool.query('SELECT NOW() AS current_time'); // Simple query
+    const result = await pool.query('SELECT NOW() AS current_time');
     res.json({ success: true, time: result.rows[0].current_time });
   } catch (error) {
     console.error('Database connection error:', error);
@@ -27,10 +32,9 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-// Serve React static files in production
+// Serve frontend in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'client/build')));
-
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
