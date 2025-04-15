@@ -12,7 +12,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/api/auth/login', form);
+
+      console.log("Login response:", res.data);
+
       localStorage.setItem('token', res.data.token);
+      // Save userId if available
+      if (res.data.user?.id) {
+        localStorage.setItem('userId', res.data.user.id);
+      }
       alert('Welcome');
       navigate('/');  // Redirect to the main page or any other page
     } catch (err) {

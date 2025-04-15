@@ -18,8 +18,11 @@ const pool = new Pool({
 
 // Import auth routes and inject the pool (if needed there)
 const authRoutes = require("./routes/auth");
-
 app.use('/api/auth', authRoutes(pool)); // pass pool if your auth.js is a function
+
+const poolRoutes = require('./routes/createpool'); // adjust path
+app.use('/api/pools', poolRoutes(pool));
+
 
 // Test DB route
 app.get('/test-db', async (req, res) => {

@@ -24,28 +24,38 @@ module.exports = function(pool) {
   });
 
   // Login route
-  router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
 
-    try {
-      const result = await pool.query(
-        'SELECT * FROM users WHERE email = $1',
-        [email]
-      );
+  try {
+    const result = await pool.query(
+      'SELECT * FROM users WHERE email = $1',
+      [email]
+    );
 
-      const user = result.rows[0];
-      if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+    const user = result.rows[0];
+    if (!user) return res.status(401).json({ error: 'Invalid credentials' });
 
-      const match = await bcrypt.compare(password, user.password);
-      if (!match) return res.status(401).json({ error: 'Invalid credentials' });
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return res.status(401).json({ error: 'Invalid credentials' });
 
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Login failed' });
-    }
-  });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+
+    // Here’s the updated response
+    res.json({
+      token,
+      user: {
+        id: user.id,
+        name: user.name,       // include more fields if you want
+        email: user.email
+      }
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Login failed' });
+  }
+});
+
 
   return router;
 };
