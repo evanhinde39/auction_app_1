@@ -6,7 +6,7 @@ import Contact from "./pages/Contact";
 import About from "./pages/About";
 import CreatePoolDashboard from "./pages/CreatePool/Dashboard";
 import CreatePool from "./pages/CreatePool/CreatePool";
-import MyPools from "./pages/MyPools";
+import MyPoolsDashboard from "./pages/MyPools/Dashboard";
 import JoinPool from "./pages/JoinPool";
 import Login from "./pages/Account/Login";
 import Register from "./pages/Account/Register";
@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/mypools" element={<MyPools />} />
+          <Route path="/mypoolsdashboard" element={<MyPoolsDashboard />} />
           <Route path="/joinpool" element={<JoinPool />} />
           <Route path="/createpooldashboard" element={<CreatePoolDashboard />} />
           <Route path="/createpool" element={<CreatePool />} />

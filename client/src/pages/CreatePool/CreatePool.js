@@ -22,7 +22,7 @@ const CreatePool = () => {
     console.log("In the front end call");
     e.preventDefault();
     try {
-      const res = await axios.post('/api/pools/create', {
+      const res = await axios.post('/api/createpool/create', {
         poolName: form.poolName,
         poolStyle,
         maxPot: form.maxPot,

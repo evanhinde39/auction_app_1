@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyPools = () => {
+const Dashboard = () => {
   return (
     <div>
       <h2>My Pools</h2>
@@ -9,4 +9,4 @@ const MyPools = () => {
   );
 };
 
-export default MyPools;
+export default Dashboard;

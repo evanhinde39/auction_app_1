@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
           <a href="/" className="btn btn-danger mx-2 my-1 text-white hover-expand">
             Home
           </a>
-          <a href="/mypools" className="btn btn-danger mx-2 my-1 text-white hover-expand">
+          <a href="/mypoolsdashboard" className="btn btn-danger mx-2 my-1 text-white hover-expand">
             My Pools
           </a>
           <a href="/joinpool" className="btn btn-danger mx-2 my-1 text-white hover-expand">
