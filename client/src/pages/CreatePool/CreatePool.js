@@ -31,7 +31,7 @@ const CreatePool = () => {
 
       if (res.status === 201) {
         alert('Pool created successfully');
-        navigate('/');  // Redirect to the home page or any other page
+        navigate('/mypoolsdashboard');  // Redirect to the home page or any other page
       }
     } catch (err) {
       console.error("Error creating pool:", err.response?.data || err.message);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"; 
+import axios from "axios";
 
 const Dashboard = () => {
   const [pools, setPools] = useState([]);
@@ -56,6 +57,29 @@ const Dashboard = () => {
               onClick={() => navigate(`/editpool/${pool.id}`)}
             >
               Edit Pool
+            </button>
+          )}
+          {String(userId) === String(pool.commissionerid) && (
+            <button 
+              className="btn btn-sm btn-danger" 
+              onClick={async () => {
+                const confirmed = window.confirm("Are you sure you wish to delete this pool?");
+                if (confirmed) {
+                  try {
+                    const res = await axios.delete(`/api/deletepool/${pool.id}`);
+                    if (res.status === 200) {
+                      alert("Pool deleted successfully.");
+                      // Optionally reload or navigate
+                      window.location.reload(); // or navigate('/mypoolsdashboard');
+                    }
+                  } catch (err) {
+                    console.error("Delete error:", err.response?.data || err.message);
+                    alert("Failed to delete the pool.");
+                  }
+                }
+              }}
+            >
+              Delete Pool
             </button>
           )}
         </td>
