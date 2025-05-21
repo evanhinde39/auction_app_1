@@ -1,30 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";  // Import useNavigate for React Router v6
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const EditPool = () => {
-  const location = useLocation();
-  const navigate = useNavigate();  // Get the navigate function
-  const poolStyle = location.state?.poolStyle || "Unknown Style";
+  const navigate = useNavigate();
+  const { id } = useParams(); // pool ID from URL
   const [form, setForm] = useState({
     poolName: '',
     maxPot: ''
   });
+  const [poolStyle, setPoolStyle] = useState(''); // fetched separately
+  const userId = localStorage.getItem('userId'); // current user ID
 
-  // Assuming the user ID is stored in localStorage under 'userId'
-  const userId = localStorage.getItem('userId');  // Or get from the auth context or session if it's stored elsewhere
+  // Fetch pool data on load
+  useEffect(() => {
+    const fetchPool = async () => {
+      try {
+        const res = await axios.get(`/api/editpool/edit/${id}`);
+        const data = res.data;
 
-  const { id } = useParams(); // grab the pool ID from the URL
+        setForm({
+          poolName: data.poolname || '',
+          maxPot: data.maxpot || ''
+        });
+        setPoolStyle(data.poolstyle || 'Unknown');
+      } catch (err) {
+        console.error("Error fetching pool data:", err.response?.data || err.message);
+        alert("Failed to load pool data.");
+      }
+    };
 
+    fetchPool();
+  }, [id]);
+
+  // Handle input change
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("In the front end call");
-  
+
     try {
       const res = await axios.put(`/api/editpool/edit/${id}`, {
         poolName: form.poolName,
@@ -32,14 +49,14 @@ const EditPool = () => {
         maxPot: form.maxPot,
         commissionerId: userId
       });
-  
+
       if (res.status === 200) {
-        alert('Pool edited successfully');
-        navigate('/');
+        alert("Pool edited successfully!");
+        navigate("/mypoolsdashboard");
       }
     } catch (err) {
       console.error("Error editing pool:", err.response?.data || err.message);
-      alert('Failed to edit pool');
+      alert("Failed to edit pool.");
     }
   };
 
@@ -86,7 +103,7 @@ const EditPool = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">Edit Pool</button>
+        <button type="submit" className="btn btn-primary">Save Changes</button>
       </form>
     </div>
   );

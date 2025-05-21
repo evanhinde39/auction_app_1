@@ -34,5 +34,26 @@ module.exports = function(pool) {
     }
   });
 
+  router.get('/edit/:id', async (req, res) => {
+    const poolId = req.params.id;
+  
+    try {
+      const result = await pool.query(
+        `SELECT * FROM pools WHERE id = $1`,
+        [poolId]
+      );
+  
+      if (result.rowCount === 0) {
+        return res.status(404).json({ message: 'Pool not found' });
+      }
+  
+      res.status(200).json(result.rows[0]);
+    } catch (err) {
+      console.error('Error fetching pool:', err);
+      res.status(500).json({ message: 'Error fetching pool' });
+    }
+  });
+  
+
   return router;
 };
