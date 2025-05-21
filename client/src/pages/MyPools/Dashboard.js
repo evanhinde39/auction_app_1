@@ -53,7 +53,7 @@ const Dashboard = () => {
           {String(userId) === String(pool.commissionerid) && (
             <button 
               className="btn btn-sm btn-success" 
-              onClick={() => navigate(`/edit-pool/${pool.id}`)}
+              onClick={() => navigate(`/editpool/${pool.id}`)}
             >
               Edit Pool
             </button>
