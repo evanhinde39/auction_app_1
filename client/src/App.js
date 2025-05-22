@@ -8,7 +8,7 @@ import CreatePoolDashboard from "./pages/CreatePool/Dashboard";
 import CreatePool from "./pages/CreatePool/CreatePool";
 import MyPoolsDashboard from "./pages/MyPools/Dashboard";
 import EditPool from "./pages/MyPools/EditPool";
-import JoinPool from "./pages/JoinPool";
+import JoinPool from "./pages/JoinPool/JoinPool";
 import Login from "./pages/Account/Login";
 import Register from "./pages/Account/Register";
 import 'bootstrap/dist/css/bootstrap.min.css';
