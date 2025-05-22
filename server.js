@@ -32,8 +32,11 @@ app.use('/api/editpool', editPoolRoutes(pool));
 const deletePoolRoutes = require('./routes/deletepool'); // adjust path
 app.use('/api/deletepool', deletePoolRoutes(pool));
 
-const searchPoolRoutes = require('./routes/joinpool'); // adjust path
+const searchPoolRoutes = require('./routes/joinpool.js'); // adjust path
 app.use('/api/searchpools', searchPoolRoutes(pool));
+
+const poolJoinRoutes = require('./routes/pooljoin.js'); // adjust path
+app.use('/api/pooljoin', poolJoinRoutes(pool));
 
 // Test DB route
 app.get('/test-db', async (req, res) => {

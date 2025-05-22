@@ -19,9 +19,9 @@ module.exports = function(pool) {
     try {
       // Insert the pool into the pools table, including the commissionerId
       const result = await pool.query(
-        `INSERT INTO pools (poolname, poolstyle, maxpot, commissionerid)
-         VALUES ($1, $2, $3, $4) RETURNING id`,
-        [poolName, poolStyle, maxPot, commissionerId]
+        `INSERT INTO pools (poolname, poolstyle, maxpot, commissionerid, members)
+         VALUES ($1, $2, $3, $4, $5) RETURNING id`,
+        [poolName, poolStyle, maxPot, commissionerId, []] // ← Empty array
       );
 
       const newPoolId = result.rows[0].id;  // Get the id of the newly created pool

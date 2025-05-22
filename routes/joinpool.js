@@ -20,6 +20,7 @@ module.exports = function(pool) {
       res.status(500).json({ error: 'Failed to search pools' });
     }
   });
+  
 
   return router;
 };

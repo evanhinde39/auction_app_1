@@ -6,6 +6,8 @@ const JoinPool = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
 
+  const userId = localStorage.getItem('userId');
+
   const handleSearch = async () => {
     try {
       const response = await fetch(`/api/searchpools?name=${encodeURIComponent(searchTerm)}`);
@@ -52,19 +54,19 @@ const JoinPool = () => {
                       className="btn btn-sm btn-primary" 
                       onClick={async () => {
                           try {
-                            const res = await axios.delete(`/api/deletepool/${pool.id}`);
+                            const res = await axios.put(`/api/pooljoin/join/${pool.id}/${userId}`);
                             if (res.status === 200) {
-                              alert("Pool deleted successfully.");
+                              alert("You have joined pool");
                               // Optionally reload or navigate
                               window.location.reload(); // or navigate('/mypoolsdashboard');
                             }
                           } catch (err) {
-                            console.error("Delete error:", err.response?.data || err.message);
-                            alert("Failed to delete the pool.");
+                            console.error("Join error:", err.response?.data || err.message);
+                            alert("Failed to join pool");
                           }
                       }}
                     >
-                      Request to Join 
+                      Join Pool
                     </button>
                   </td>
                   <td>{pool.poolname}</td>
