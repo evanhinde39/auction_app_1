@@ -46,7 +46,7 @@ const Dashboard = () => {
         <td className="d-flex gap-2">
           <button 
             className="btn btn-sm btn-warning" 
-            onClick={() => navigate(`/draft-room/${pool.id}`)}
+            onClick={() => navigate(`/draftroom/${pool.id}`)}
           >
             Enter Draft Room
           </button>

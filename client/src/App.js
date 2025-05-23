@@ -9,6 +9,7 @@ import CreatePool from "./pages/CreatePool/CreatePool";
 import MyPoolsDashboard from "./pages/MyPools/Dashboard";
 import EditPool from "./pages/MyPools/EditPool";
 import JoinPool from "./pages/JoinPool/JoinPool";
+import DraftRoom from "./pages/DraftRoom/Dashboard";
 import Login from "./pages/Account/Login";
 import Register from "./pages/Account/Register";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -27,6 +28,7 @@ function App() {
           <Route path="/joinpool" element={<JoinPool />} />
           <Route path="/createpooldashboard" element={<CreatePoolDashboard />} />
           <Route path="/createpool" element={<CreatePool />} />
+          <Route path="/draftroom/:id" element={<DraftRoom />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
