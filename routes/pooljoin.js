@@ -12,15 +12,18 @@ module.exports = function(pool) {
     console.log(`Trying to join pool ${poolId} with user ${userId}`);
 
     try {
-        const result = await pool.query(
-            `
-            UPDATE pools
-            SET members = array_append(members, $1)
-            WHERE id = $2 AND NOT ($1 = ANY(members))
-            RETURNING *
-            `,
-            [String(userId), parseInt(poolId)]
-        );
+      const result = await pool.query(
+        `
+        UPDATE pools
+        SET members = array_append(members, $1)
+        WHERE id = $2 
+          AND NOT ($1 = ANY(members))
+          AND commissionerid != $1
+        RETURNING *
+        `,
+        [String(userId), parseInt(poolId)]
+      );
+      
           
 
       if (result.rowCount === 0) {
